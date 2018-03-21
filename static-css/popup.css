@@ -1,0 +1,78 @@
+html, body {
+    min-width: 350px;
+    //min-height: 200px;
+    margin: 0px;
+    padding: 0px;
+}
+
+#summary {
+    font-family: serif;
+    font-size: 20px;
+}
+
+.left {
+    float: left;
+    width: 50%;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.right {
+    float: right;
+    width: 50%;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#temp {
+    background-color: #6ACDC8;
+    position: relative;
+}
+.wi-thermometer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 10px;
+}
+
+#wind {
+    background-color: #6ACDC8;
+    position: relative;
+}
+.wi-strong-wind {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding: 10px;
+}
+
+#desc {
+    background-color: #6ACDC8;
+}
+
+#rating {
+    background-color: #6ACDC8;
+}
+
+
+/ **********  Footer *********/
+.footer {
+    width: 100%;
+    background-color: #6ACDC8;
+}
+.footer-headline {
+    padding: 2px;
+    background-color: #6ACDC8;
+}
+.footer-headline a {
+    float: right;
+}
+.footer-credits {
+    display: none;
+    padding: 0px 10px 10px 10px;
+    background-color: #6ACDC8;
+}
