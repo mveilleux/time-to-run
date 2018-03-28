@@ -10,7 +10,16 @@ _gaq.push(['_trackPageview']);
 
 window.onload = function() {
 
-  $( "#tabs" ).tabs();
+
+  $("#show-credits").click(function(){
+    $("#summary").hide();
+    $("#credits").show();
+  });
+
+  $("#back").click(function(){
+    $("#summary").show();
+    $("#credits").hide();
+  });
 
   chrome.storage.local.get(['lastvalues'], function(data) {
     //tmp = JSON.stringify(data);
@@ -27,16 +36,19 @@ window.onload = function() {
     }
 
     $("#desc").html(data.lastvalues.desc);
-    $("#temp").html(data.lastvalues.temp + "&nbsp;&#8457;");
-    $("#wind").html(data.lastvalues.wind + "&nbsp;mph");
+    $("#temp").html(data.lastvalues.temp.toFixed(0) + "<span class='small'>&#8457;</span>");
+    $("#wind").html(data.lastvalues.wind.toFixed(0) + "<span class='small'>mph</span>");
 
     var g = new JustGage({
       id: "gauge",
       value: data.lastvalues.rating,
       min: 0,
       max: 10,
-      title: "Run Rating!",
-      titleFontColor: "black",
+      shadowOpacity: 0,
+      label: "Run Rating",
+      labelFontColor: "#4d4d4d",
+      valueFontColor: "#4d4d4d",
+      valueFontFamily: "Roboto",
       hideMinMax: true,
       levelColors: ["#c12b09", "#edd51e", "#1daa5a"]
     });
