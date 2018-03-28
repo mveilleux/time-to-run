@@ -20,21 +20,62 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <script src="static-js/justgage.js"></script>
   </head>
   <body>
+    <!-- <div class="header">
+      Time To Run
+    </div> -->
     <div id="summary">
-      <div class="left" id="temp">No data yet!</div>
-      <div class="right" id="desc">No data yet!</div>
-      <div class="left" id="wind">No data yet!</div>
-      <div class="left" id="rating"><div id="gauge" style="width:100%; height:100%"></div></div>
-    </div>
-    <div class="footer">
-      <div class="footer-headline">
-	Developed with hundreds of miles of asphault. <a href="#" id="showcredits">Show credits</a>
+      <div id="gauge"></div>
+
+      <div class="grid top">
+        <div class="grid-2">
+
+          <div class="one center">
+
+            <div class="grid">
+              <div class="center"><img alt="temperature" class="icon" src="images/weather-icons/svg/wi-thermometer.svg"/></div>
+              <div class="data" id="temp">No data yet!</div>
+            </div>
+
+          </div>
+
+          <div class="one center">
+
+            <div class="grid">
+              <div class="center"><img alt="wind" class="icon" src="images/weather-icons/svg/wi-strong-wind.svg"/></div>
+              <div class="data" id="wind">No data yet!</div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="two center">
+
+          <div class="grid">
+            <div class="center"><img alt="weather" class="icon" src="images/weather-icons/svg/wi-day-sunny-overcast.svg"/></div>
+            <div class="data" id="desc">No data yet!</div>
+          </div>
+
+        </div>
       </div>
-      <div class="footer-credits">
-	<h2>Credits</h2>
-	Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+
+      <div class="footer" id="show-credits">
+        credits
       </div>
     </div>
+
+    <div id="credits">
+      <dl>
+        <dt>Runner Icon</dt>
+        <dd><a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a></dd>
+        <dt>Weather SVGs</dt>
+        <dd><a href="https://github.com/erikflowers/weather-icons/" title="erikflowers/weather-icons">https://github.com/erikflowers/weather-icons/</a></dd>
+      </dl>
+      <div class="footer" id="back">
+        back
+      </div>
+    </div>
+
     <script src="popup.js"></script>
   </body>
 </html>
