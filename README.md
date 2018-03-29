@@ -16,5 +16,8 @@ Using Unpacked Extension:
 - Updated the extension icon based (red-black-green) based on the rating
 - Displays the detailed temperature, wind and weather description in the popup when opened
 
-## Contributing
-* Fork it, send an issue or pull request, enjoy!
+## Contributions
+Fork it, send an issue or pull request, enjoy! Contributors include:
+
+* [Mike Veilleux](https://github.com/mveilleux)
+* [Nick Sjostrom](https://github.com/anothrNick)
