@@ -8,6 +8,32 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
+var ICON_PATH = "images/weather-icons/svg/";
+var DEFAULT_ICON = "wi-day-sunny-overcast.svg";
+// Map of descriptions to weather icons based on
+// https://openweathermap.org/weather-conditions#Icon-list
+var ICONS = {
+  "clear sky": "wi-day-sunny.svg",
+  "few clouds": "wi-day-sunny-overcast.svg",
+  "scattered clouds": "wi-day-sunny-overcast.svg",
+  "broken clouds": "wi-day-sunny-overcast.svg",
+  "shower rain": "wi-showers.svg",
+  "rain": "wi-rain.svg",
+  "thunderstorm": "wi-thunderstorm.svg",
+  "snow": "wi-snow.svg",
+  "mist": "wi-fog.svg",
+};
+
+// Get the correct weather icon based on the description
+// returned from the weather api. If we don't have an 
+// icon for a description, return the DEFAULT_ICON
+function getIcon(description) {
+  if(ICONS.hasOwnProperty(description)) {
+    return ICON_PATH + ICONS[description];
+  }
+  return ICON_PATH + DEFAULT_ICON;
+}
+
 window.onload = function() {
 
 
@@ -20,6 +46,8 @@ window.onload = function() {
     $("#summary").show();
     $("#credits").hide();
   });
+
+  var weatherEl = $("#weather");
 
   chrome.storage.local.get(['lastvalues'], function(data) {
     //tmp = JSON.stringify(data);
@@ -35,6 +63,8 @@ window.onload = function() {
       return;
     }
 
+    // set weather icon
+    weatherEl.attr("src", getIcon(data.lastvalues.desc));
     $("#desc").html(data.lastvalues.desc);
     $("#temp").html(data.lastvalues.temp.toFixed(0) + "<span class='small'>&#8457;</span>");
     $("#wind").html(data.lastvalues.wind.toFixed(0) + "<span class='small'>mph</span>");
