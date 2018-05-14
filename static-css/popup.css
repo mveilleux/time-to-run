@@ -16,6 +16,8 @@ html, body {
 
 #gauge {
     margin-top: -20px;
+    min-width: 200px;
+    min-height: 155px;
 }
 
 #summary {
@@ -83,7 +85,7 @@ html, body {
 }
 
 #credits dt {
-    
+
 }
 
 #credits dd {
