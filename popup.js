@@ -25,7 +25,7 @@ var ICONS = {
 };
 
 // Get the correct weather icon based on the description
-// returned from the weather api. If we don't have an 
+// returned from the weather api. If we don't have an
 // icon for a description, return the DEFAULT_ICON
 function getIcon(description) {
   if(ICONS.hasOwnProperty(description)) {
@@ -36,6 +36,13 @@ function getIcon(description) {
 
 window.onload = function() {
 
+  $(".left-adj").click(function(){
+    alert('left');
+  });
+
+  $(".right-adj").click(function(){
+    alert('right');
+  });
 
   $("#show-credits").click(function(){
     $("#summary").hide();
