@@ -16,12 +16,16 @@ html, body {
 
 #gauge {
     margin-top: -20px;
+    margin-bottom: 15px;
     min-width: 200px;
     min-height: 155px;
 }
 
 #adjustments {
-    margin: -20px 23px 40px 23px;
+    width: 100%;
+    position: absolute;
+    top: 110px;
+    left: 0px;
 }
 
 #summary {
@@ -87,6 +91,8 @@ html, body {
     border-radius: 50%;
     width: 28px;
     height: 28px;
+    margin-left: 23px;
+    margin-right: 23px;
 }
 
 .round-button:hover {
