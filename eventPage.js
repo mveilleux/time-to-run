@@ -1,4 +1,4 @@
-var debug = true;
+var debug = false;
 
 // Enable Google analytics
 var _gaq = _gaq || [];
@@ -11,29 +11,39 @@ var _gaq = _gaq || [];
 }(),
 _gaq.push(["_setAccount", "UA-87086305-1"])
 
+// Check whether new version is installed
+chrome.runtime.onInstalled.addListener(function(details){
+  if(details.reason == "install"){
+    _gaq.push(["_trackEvent", "active", "installed"]);
+    getLocation();
+  }
+});
 
 // Setup alarm
-chrome.alarms.create("checkRun", {delayInMinutes: 1, periodInMinutes: 1} );
+chrome.alarms.create("checkRun", {delayInMinutes: 1, periodInMinutes: 15} );
 
 // Alarm start
 chrome.alarms.onAlarm.addListener(function(alarm) {
-  if (debug) console.log("Got alarm");
-  _gaq.push(["_trackEvent", "active", "ping"]);
-  getLocation();
+  if (debug) console.log("Got alarm: " + alarm.name);
+
+  if (alarm.name = "checkRun") {
+    _gaq.push(["_trackEvent", "active", "updatedRating"]);
+    getLocation();
+  }
 
 });
 
 // Message start
 chrome.runtime.onMessage.addListener( function(request,sender,sendResponse)
 {
-  _gaq.push(["_trackEvent", "active", "ping"]);
+  if (debug) console.log("Got Message: " + request.greeting);
 
-  if (debug) console.log("Got Message");
   if( request.greeting === "NoDataOnLoad" )
   {
-      if (debug) console.log("Message was: No data on load");
-      getLocation();
-      sendResponse( {message: "started"} );
+    if (debug) console.log("Message was: No data on load");
+    _gaq.push(["_trackEvent", "active", "firstLoad"]);
+    getLocation();
+    sendResponse( {message: "started"} );
   }
 });
 
@@ -81,10 +91,11 @@ function getUserMLData(weather) {
 
   chrome.storage.local.get(['userSetRatings'], function(mlData) {
     mlData = mlData.userSetRatings;
-    if (debug) console.log(mlData);
+
     if (mlData == null) {
       mlData = {};
     }
+
     getStandardMLData(mlData, weather);
   });
 
@@ -99,8 +110,8 @@ function getStandardMLData(mlUserData, weather) {
     url: "train-data.csv",
     dataType: "text",
     success: function(mlStandardData) {
+      // Convert standard data from file from CSV to array
       mlStandardData = $.csv.toArrays(mlStandardData);
-      if (debug) console.log(mlStandardData);
 
       // Iterate through standard data, adding each one to the user data array
       for (var i = 0; i < mlStandardData.length; i++) {
@@ -132,10 +143,10 @@ function getStandardMLData(mlUserData, weather) {
           combinedData.push([temp, wind, mlUserData[temp][wind]]);
         }
       }
-      //combinedData = JSON.parse(JSON.stringify(combinedData))
-      if (debug) console.log(combinedData);
-      combinedData2 = JSON.parse(JSON.stringify(combinedData));
-      predictRating(combinedData2, weather, directRating);
+
+      //if (debug) console.log(combinedData);
+
+      predictRating(combinedData, weather, directRating);
     }
   });
 
@@ -162,7 +173,6 @@ function predictRating (mlData, weather, directRating) {
   }
 
   if (debug) console.log(rating_prediction);
-
 
   set_new_rating(rating_prediction,
                  {'temp': weather.main.temp,
